@@ -2,27 +2,39 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Sign up</title>
+	<title>Sign up</title>	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
-	<link rel="stylesheet" href="css/main.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="country-dropdown/css/msdropdown/dd.css" />
+	<link rel="stylesheet" type="text/css" href="country-dropdown/css/msdropdown/flags.css" />
 	<link rel="stylesheet" href="css/materialize.css">
+	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 	<div class="section center-align">
-		<h5>Sign up</h5>
+		<a href="index.html"><i class="small material-icons f-lf back">keyboard_arrow_left</i></a>
+		<h5 class="dp-in">Sign up</h5>
 		<p>Join now for free ride credit</p>
 		<div class="divider"></div>  
 	</div>
 	<div class="section center-align">
 		<form>
-			<select class="browser-default pais">
-				<option value="" disabled selected>País</option>
-				<option value="peru" class="b-peru">Peru</option>
-			</select> +51 
-			<input type="number" placeholder="12345678" class="numero"> 
-	  </form> 
-	  <p>We'll send a text to verify your phone</p>
- 		<a class="waves-effect waves-light btn purple accent-3 btn-next">Next</a>
+			<select class="browser-default style" name="countries" id="countries">
+				<option value='ad' data-image="country-dropdown/images/msdropdown/icons/blank.gif" data-imagecss="flag pe" data-title="Peru"></option>
+				<option value='ae' data-image="country-dropdown/images/msdropdown/icons/blank.gif" data-imagecss="flag ae" data-title="United Arab Emirates"></option>
+				<option value='af' data-image="country-dropdown/images/msdropdown/icons/blank.gif" data-imagecss="flag af" data-title="Afghanistan"></option>
+				<option value='ag' data-image="country-dropdown/images/msdropdown/icons/blank.gif" data-imagecss="flag ag" data-title="Antigua and Barbuda"></option>
+			</select>    
+			<input type="tel" id="numero" class="numero" placeholder="123456789" > 
+		</form> 
+		<p>We'll send a text to verify your phone</p>
+		<a id="next" class="waves-effect waves-light btn purple accent-3 btn-next" href="verify.html">Next</a>
   </div>  	  
+ <!--  <script type="text/javascript" src="js/jquery-3.1.1.js"></script>   -->
+ 	<script src="country-dropdown/js/jquery/jquery-1.8.2.min.js"></script>
+  	<script type="text/javascript" src="js/app.js"></script>		
+  	<script src="country-dropdown/js/msdropdown/jquery.dd.min.js"></script>
+
 </body>
 </html>
