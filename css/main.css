@@ -23,3 +23,18 @@
 	text-align: center;
 	margin-top: 400px;
 }
+.pais{
+    width: 12%;
+    display: inline !important;
+}
+
+.b-peru {
+	background-image:url("../img/peru.png");
+}
+.numero{
+	width: 22% !important;
+}
+.btn-next{
+	margin-top: 300px;
+    width: 100%;
+}
