@@ -5,6 +5,8 @@
 	<title>Sign up - datos </title>	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+	<link rel="stylesheet" type="text/css" href="country-dropdown/css/msdropdown/dd.css" />
+	<link rel="stylesheet" type="text/css" href="country-dropdown/css/msdropdown/flags.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="css/materialize.css">
 	<link rel="stylesheet" href="css/main.css">
@@ -19,16 +21,21 @@
 	<div class="section center-align">
 	  <form>		
 	  	<div class="row">
-	    	<div class="col s12">
-		        <input id="icon_prefix" type="text" class="validate dp-in num">
-		        <input id="icon_prefix" type="text" class="validate dp-in num">
-		        <input id="icon_prefix" type="text" class="validate num">
+	    	<div class="col s12 inputsVerify">
+	    		<p class="dp-in">LAB - </p>
+		        <input id="icon_prefix" type="tel" class="validate dp-in num">
+		        <input id="icon_prefix" type="tel" class="validate dp-in num">
+		        <input id="icon_prefix" type="tel" class="validate num">
 	  		</div>
 	    </div>
 	  </form>
-	  <p>Enter the code sent to +51 980 945 229</p>
+	  <p>Enter the code sent to</p> <span id="phone"></span>
 	  <a class="waves-effect waves-light btn">Resend code</a>
 	  <a class="waves-effect waves-light btn purple accent-3 btn-next" href="datos.html">Next</a>
   </div>
+  <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+  <script src="country-dropdown/js/jquery/jquery-1.8.2.min.js"></script>
+  <script src="country-dropdown/js/msdropdown/jquery.dd.min.js"></script>		
 </body>
 </html>

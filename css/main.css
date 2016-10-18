@@ -45,9 +45,10 @@ input.numero{
 
 .btn-next{
 	width: 100%;
-    position: fixed;
+    position: absolute;
     left: 0;
-    top: 500px;}
+    bottom: 0;
+}
 
 .dp-in{
 	display: inline;

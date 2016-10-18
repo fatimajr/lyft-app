@@ -1,37 +1,42 @@
 $(document).ready(function() {
-	$("#numero").keydown(function(evento) {
+	var soloNumeros = function(evento) {
 		var ascii = evento.keyCode;
 		if (ascii == 8 || (ascii >= 48 && ascii <= 57)) {
 			return true;
 		} else {
 			return false;
 		}
-	});
-
-	$("#numero").keyup(function(evento) {
-		var longitud = $(this).val().length;
-		if (longitud == 9) {
-			$("#next").attr("href", "registro.html");
-			$("#next").removeClass("disabled");
-		} else {
-			$("#next").removeAttr("href");
-			$("#next").addClass("disabled");
-		}
-	});
-
-	$("#next").click(function(evento){
-		var random = "LAB"+(Math.floor(Math.random()*900)+100);
+	};
+	var randomNumber = function(evento){
+		var random = "LAB"+ "-"+(Math.floor(Math.random()*900)+100);
 		alert(random);
-	});
+		localStorage.setItem("codigo", random);
+	};
+	var imputVal = function(){
+   		$(this).attr("maxlength", 1);
+	   	if($(this).val().length==$(this).attr("maxlength")){
+	    $(this).next().focus();
+	   }
+	};
+	var registroVal = function(evento) {
+			$(this).attr("maxlength", 9);
+			var longitud = $(this).val().length;
+			var numeroVal = $(this).val();
+			localStorage.setItem("phone", numeroVal);
+			if (longitud == 9) {
+				$("#next").attr("href", "verify.html").removeClass("disabled").click(randomNumber);
+			} else {
+				$("#next").removeAttr("href").addClass("disabled");
+			}
+		};
+
+	$("#numero").keyup(registroVal);
 
 	$("#countries").msDropdown();
+
+	$("#numero").keydown(soloNumeros);
+
+	$("input.num").keyup(imputVal);
+
+	$("input.num").keydown(soloNumeros);
 });
-
-// "4".charCodeAt(0) 
-// 
-// Funcionalidades para Lyft
-
-// - Validar que solo se ingresen #s
-// - Validar que sean 9 #s como max.
-// - Generar un código aleatorio con la estructura LAB-XYZ
-// - Validar lo obvio
