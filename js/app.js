@@ -1,5 +1,10 @@
 var cargarPagina = function(evento) {
+
 	$("#nextVerify").click(compararCode);
+
+	$("#nextDatos").click(getNames);
+
+	$("#nextDatos").click(datosVal);
 
 	$("#numero").keyup(registroVal);
 
@@ -12,9 +17,20 @@ var cargarPagina = function(evento) {
 	$("input.num").keydown(soloNumeros);
 
 	$("#phone").text(numeroVal);
-};
+	
+	$("#user").text(inputName + " " + inputLastname);
 
-$(document).ready(cargarPagina);
+	if (navigator.geolocation) { 
+		// también se puede usar if ("geolocation" in navigator) {}
+		navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
+	}
+	$(".button-collapse").sideNav({
+		menuWidth: 220, 
+		// closeOnClick: true        // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    });	
+
+   
+};
 
 // Validación Registro y código - Solo se aceptan números
 var soloNumeros = function(evento) {
@@ -36,8 +52,9 @@ var randomNumber = function(evento){
 // Validación de código - focus para 3 inputs
 var imputVal = function(evento){
 	var ascii = evento.keyCode;
-		$(this).attr("maxlength", 1);
-   	if($(this).val().length==$(this).attr("maxlength")){
+	$(this).attr("maxlength", 1);
+
+   	if($(this).val().length == $(this).attr("maxlength")){
     	$(this).next().focus();
    	} else if(ascii === 8) {
         $(this).prev().focus();
@@ -45,20 +62,22 @@ var imputVal = function(evento){
 };
 // Campo de teléfono (Registro)
 var registroVal = function(evento) {
-		$(this).attr("maxlength", 9);
-		var longitud = $(this).val().length;
-		var numeroVal = $(this).val();
-		localStorage.setItem("phone", numeroVal);
-		if (longitud == 9) {
-			$("#next").attr("href", "verify.html").removeClass("disabled").click(randomNumber);
-		} else {
-			$("#next").removeAttr("href").addClass("disabled");
-		}
-	};
+	$(this).attr("maxlength", 9);
+	var longitud = $(this).val().length;
+	var numeroVal = $(this).val();
+	localStorage.setItem("phone", numeroVal);
+	if (longitud == 9) {
+		$("#next").attr("href", "verify.html").removeClass("disabled").click(randomNumber);
+	} else {
+		$("#next").removeAttr("href").addClass("disabled");
+	}
+};
 
 // Variables almacenadas en localstorage
 var numeroVal = localStorage.getItem("phone");
 var ranCode = localStorage.getItem("codigo");
+var inputName = localStorage.getItem("nombre");
+var inputLastname = localStorage.getItem("apellido");
 
 // Validación de código - 3 inputs (alerts) 
 var compararCode = function(evento){
@@ -74,5 +93,80 @@ var compararCode = function(evento){
 		return false;
 	} 
 };
+var getNames = function(evento){
+	var inputName = $("input.name").val();
+	localStorage.setItem("nombre", inputName);
+	var inputLastname = $("input.lastName").val();
+	localStorage.setItem("apellido", inputLastname);
+};
+// Validación formulario datos - nombre y apellido 
+var datosVal = function(evento){ //function expression
+	var name = $("input.name").val().length;
+	var lname = $("input.lastName").val().length;
+	var email = $("input.email").val().length;
+	if(name > 2 && name <= 20) {
+		$(this).attr("href", "maps.html");
+	} else {
+		alert("Ingresa tu nombre");
+		return false;
+	}
+	if(lname > 2 && lname <= 20) {
+		$(this).attr("href", "maps.html");
+	} else {
+		alert("Ingresa tu apellido");
+		return false;
+	}
+	if(email > 5 && email <= 50){
+		$(this).attr("href", "maps.html");
+	} else {
+		alert("Ingresa un email válido");
+		return false;
+	}
+	if (validateEmail(email)) {
+		alert("Email válido");
+	} else {
+		alert("Email inválido");
+		return false;
+	}
+};
+
+// Function statement que valida el email usando una regular expression.
+function validateEmail(email) {
+	var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+	if (filter.test(sEmail)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+};
+
+var funcionExito = function(posicion) {
+	var lat = posicion.coords.latitude;
+    var lon = posicion.coords.longitude;
+    var maps = new GMaps({
+	  div: '#map',
+	  lat: lat ,
+	  lng: lon ,
+	  mapTypeControl: false,
+	  zoomControl: false,
+	  streetViewControl: false
+	});
+
+	maps.addMarker({
+	  lat: lat ,
+	  lng: lon ,
+	  title: 'Lima',
+	  click: function(e) {
+	    alert('You clicked in this marker');
+	  }
+	});
+};
+
+var funcionError = function (error) {
+	console.log(error);
+};
+
+$(document).ready(cargarPagina);
 
 
