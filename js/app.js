@@ -39,6 +39,7 @@ var cargarPagina = function(evento) {
 		// closeOnClick: true        // Closes side-nav on <a> clicks, useful for Angular/Meteor
     });	
 };
+   
 
 // Validación Registro y código - Solo se aceptan números
 var soloNumeros = function(evento) {
@@ -183,6 +184,20 @@ var funcionExito = function(posicion) {
 	  click: function(e) {
 	    alert('You clicked in this marker');
 	  }
+	});
+
+	var dir = "";
+	var latlng = new google.maps.LatLng(lat, lon);
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({"latLng": latlng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[0]) {
+				dir = results[0].formatted_address;
+			} else {
+				dir = "No se ha podido obtener ninguna dirección en esas coordenadas.";
+			}
+		}
+		$("#ubicacion").text(dir);
 	});
 };
 
