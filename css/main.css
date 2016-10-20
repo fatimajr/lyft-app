@@ -138,3 +138,6 @@ i.igift.small{
 a.lyft:hover{
 	background-color: #d500f9;
 }
+img.responsive-img{
+    height: 80%;
+}
