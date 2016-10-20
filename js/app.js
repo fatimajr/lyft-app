@@ -28,6 +28,8 @@ var cargarPagina = function(evento) {
 
 	$("#correo").text(inputEmail);
 
+	$("#join").text(fecha);
+
 	if (navigator.geolocation) { 
 		// también se puede usar if ("geolocation" in navigator) {}
 		navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
@@ -94,7 +96,7 @@ var ranCode = localStorage.getItem("codigo");
 var inputName = localStorage.getItem("nombre");
 var inputLastname = localStorage.getItem("apellido");
 var inputEmail = localStorage.getItem("email");
-
+var fecha = localStorage.getItem("dateJoin");
 
 // Validación de código - 3 inputs (alerts) 
 var compararCode = function(evento){
@@ -124,6 +126,7 @@ var datosVal = function(evento){ //function expression
 	var lname = $("input.lastName").val().length;
 	var email = $("input.email").val().length;
 	var correo =  $("input.email").val();
+	dateJoin();
 	if(name > 2 && name <= 20) {
 		$(this).attr("href", "maps.html");
 	} else {
@@ -185,6 +188,15 @@ var funcionExito = function(posicion) {
 
 var funcionError = function (error) {
 	console.log(error);
+};
+
+var dateJoin = function() {
+    var meses = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "December"];
+    var f = new Date();
+    var d = f.getMonth();
+    var a = f.getFullYear();
+    var fecha = meses[d] + " " + a;
+    localStorage.setItem("dateJoin", fecha);
 };
 
 $(document).ready(cargarPagina);
