@@ -30,14 +30,14 @@ var cargarPagina = function(evento) {
 
 	$("#join").text(fecha);
 
-	if (navigator.geolocation) { 
-		// también se puede usar if ("geolocation" in navigator) {}
-		navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
-	}
-	$(".button-collapse").sideNav({
-		menuWidth: 220, 
-		// closeOnClick: true        // Closes side-nav on <a> clicks, useful for Angular/Meteor
-    });	
+	// if (navigator.geolocation) { 
+	// 	// también se puede usar if ("geolocation" in navigator) {}
+	// 	navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
+	// }
+	// $(".button-collapse").sideNav({
+	// 	menuWidth: 220, 
+	// 	// closeOnClick: true        // Closes side-nav on <a> clicks, useful for Angular/Meteor
+ //    });	
 };
    
 
