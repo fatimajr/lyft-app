@@ -126,7 +126,8 @@ i.igift.small{
 	background-color: gray;
 }
 .usericon{
-	width: 50%;
+	width: 150px;
+	height: 150px;
 	margin-right: 8%;
 }
 
@@ -142,4 +143,13 @@ a.lyft:hover{
 }
 img.responsive-img{
     height: 80%;
+}
+.upimg{
+	width: 100px;
+	height: 100px;
+}
+input#inputFile{
+	color: white;
+    padding-left: 35%;
+    padding-bottom: 3%;
 }

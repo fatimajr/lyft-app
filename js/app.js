@@ -41,9 +41,10 @@ var cargarPagina = function(evento) {
     $("#perm").text(me);
 
 	$("#inputFile").change(savePhoto);
-
-	$("#profilePhoto").attr("src", image);
-
+	if(image != null){
+		$("#profilePhoto").attr("src", image);
+	}
+	
 };
    
 
