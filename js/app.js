@@ -1,6 +1,4 @@
 var cargarPagina = function(evento) {
-
-	$("#next").click(randomNumber);
 	
 	$("#numero").keyup(registroVal).focus();
 
@@ -30,14 +28,22 @@ var cargarPagina = function(evento) {
 
 	$("#join").text(fecha);
 
-	// if (navigator.geolocation) { 
-	// 	// también se puede usar if ("geolocation" in navigator) {}
-	// 	navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
-	// }
-	// $(".button-collapse").sideNav({
-	// 	menuWidth: 220, 
-	// 	// closeOnClick: true        // Closes side-nav on <a> clicks, useful for Angular/Meteor
- //    });	
+	 $("#inputFile").change(function () {
+        readURL(this);
+    });
+
+    $("#savebutton").click(guardaDatos);
+
+    $("#home").text(city);
+
+    $("#note").text(music);
+
+    $("#perm").text(me);
+
+	$("#inputFile").change(savePhoto);
+
+	$("#profilePhoto").attr("src", image);
+
 };
    
 
@@ -51,17 +57,10 @@ var soloNumeros = function(evento) {
 	}
 };
 
-// Campo de registro - Código LAB Random 
-var randomNumber = function(evento){
-	var random = (Math.floor(Math.random()*900)+100);
-	alert("LAB" + "-" + random);
-	localStorage.setItem("codigo", random);
-};
-
 //Nuevo código de registro - RESEND CODE BUTTON
 var nuevoRandom = function(evento){
 	var resend = (Math.floor(Math.random()*900)+100);
-	alert("LAB" + "-" + resend);
+	sweetAlert("LAB" + "-" + resend);
 	localStorage.setItem("code", resend);
 	ranCode = resend;
 };
@@ -85,11 +84,19 @@ var registroVal = function(evento) {
 	var numeroVal = $(this).val();
 	localStorage.setItem("phone", numeroVal);
 	if (longitud == 9) {
-		$("#next").attr("href", "verify.html").removeClass("disabled");
+		$("#next").attr("href", "verify.html").removeClass("disabled").click(randomNumber);
 	} else {
 		$("#next").removeAttr("href").addClass("disabled");
 	}
 };
+
+// Campo de registro - Código LAB Random 
+var randomNumber = function(evento){
+	var random = (Math.floor(Math.random()*900)+100);
+	alert("LAB" + "-" + random);
+	localStorage.setItem("codigo", random);
+};
+
 
 // Variables almacenadas en localstorage
 var numeroVal = localStorage.getItem("phone");
@@ -98,6 +105,21 @@ var inputName = localStorage.getItem("nombre");
 var inputLastname = localStorage.getItem("apellido");
 var inputEmail = localStorage.getItem("email");
 var fecha = localStorage.getItem("dateJoin");
+var city = localStorage.getItem("ciudad");
+var music = localStorage.getItem("musica");
+var me = localStorage.getItem("yo");
+var image = localStorage.getItem("photoPreview");
+
+
+var guardaDatos = function(){
+	var city = $("#city").val();
+	localStorage.setItem("ciudad", city);
+	var music = $("#music").val();
+	localStorage.setItem("musica", music);
+	var me = $("#me").val();
+	localStorage.setItem("yo", me);
+	$(this).attr("href","profile.html");
+}
 
 // Validación de código - 3 inputs (alerts) 
 var compararCode = function(evento){
@@ -106,10 +128,10 @@ var compararCode = function(evento){
 	if(userCode == ranCode){
 		$(this).attr("href", "datos.html");
 	} else if(noCode == 0){
-		alert ("Ingrese su código por favor");
+		sweetAlert ("Please enter your code");
 		return false;
 	}else if(userCode != ranCode){
-		alert ("Código inválido");
+		sweetAlert ("Invalid code");
 		return false;
 	} 
 };
@@ -122,45 +144,36 @@ var setNames = function(evento){
 	localStorage.setItem("email", inputEmail);
 };
 // Validación formulario datos - nombre y apellido 
-var datosVal = function(evento){ //function expression
-	var name = $("input.name").val().length;
-	var lname = $("input.lastName").val().length;
-	var email = $("input.email").val().length;
-	var correo =  $("input.email").val();
+var datosVal = function(){ //function expression
+	var name = $("input.name").val().trim().length;
+	var lname = $("input.lastName").val().trim().length;
+	var email = $("input.email").val().trim().length;
+	var correo = $("input.email").val();
+	var filter = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 	dateJoin();
+
 	if(name > 2 && name <= 20) {
 		$(this).attr("href", "maps.html");
 	} else {
-		alert("Ingresa tu nombre");
+		sweetAlert("Please enter your name");
 		return false;
 	}
 	if(lname > 2 && lname <= 20) {
 		$(this).attr("href", "maps.html");
 	} else {
-		alert("Ingresa tu apellido");
+		sweetAlert("Please enter your last name");
 		return false;
 	}
-	if(email > 5 && email <= 50){
+	if(email > 5 && email <= 50 && filter.test(correo)){
 		$(this).attr("href", "maps.html");
 	} else {
-		alert("Ingresa un email válido");
+		sweetAlert("Please enter a valid email");
 		return false;
 	}
-	if (validateEmail(correo)) {
-		
-	} else {
-		alert("Email inválido");
-		return false;
-	}
-};
-
-// Function statement que valida el email usando una regular expression.
-function validateEmail(correo) {
-	var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-	if (filter.test(correo)) {
-		return true;
-	}
-	else {
+	if($("#filled-in-box").is(":checked")) {
+		$(this).attr("href", "maps.html");
+	} else{
+		sweetAlert("Please accept terms and conditions")
 		return false;
 	}
 };
@@ -182,7 +195,7 @@ var funcionExito = function(posicion) {
 	  lng: lon ,
 	  title: 'Lima',
 	  click: function(e) {
-	    alert('You clicked in this marker');
+	    sweetAlert('You clicked in this marker');
 	  }
 	});
 
@@ -212,6 +225,30 @@ var dateJoin = function() {
     var a = f.getFullYear();
     var fecha = meses[d] + " " + a;
     localStorage.setItem("dateJoin", fecha);
+};
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image_upload_preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+var savePhoto = function(event) {
+    if(event.target.files && event.target.files[0]){
+		var reader = new FileReader();
+
+		reader.onload = function(event){
+			var preview = event.target.result;
+			$("#image_upload_preview").attr("src", preview);
+			localStorage.setItem("photoPreview", preview);
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	}	
 };
 
 $(document).ready(cargarPagina);

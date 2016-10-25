@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="css/materialize.css">
+	<link rel="stylesheet" href="css/vendor/materialize.css">
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -26,7 +26,7 @@
 	    <li>
 		    <div class="userView">
 		      <img class="background responsive-img" src="img/foto2.jpg">
-		      <a href="#!user"><img class="circle responsive-img" src="img/user1.png"></a>
+		      <a href="#!user"><img class="circle responsive-img" src="img/user1.png" id="profilePhoto"></a>
 		      <a href="#!name"><span class="white-text" id="user"></span></a>
 		      <a href="#!email"><span class="white-text" id="correo"></span></a>
 		      <a href="profile.html">View Profile</a>
@@ -43,9 +43,10 @@
   	</ul>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0PuG0ECyU64mssdlEsviUhtDBLBgZ00" async defer></script>
 	<script src="country-dropdown/js/jquery/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>	
 	<script type="text/javascript" src="js/mapa.js"></script>	
-	<script type="text/javascript" src="js/materialize.min.js"></script>	
+	<script type="text/javascript" src="js/vendor/materialize.min.js"></script>	
 	<script src="country-dropdown/js/msdropdown/jquery.dd.min.js"></script>			
-	<script type="text/javascript" src="js/gmaps.js"></script>
+	<script type="text/javascript" src="js/vendor/gmaps.js"></script>
 </body>
 </html>
