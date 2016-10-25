@@ -10,7 +10,6 @@ var cargarPagina = function(evento) {
 
 	$("#correo").text(inputEmail);
 
-
 	$(".button-collapse").sideNav({
 		menuWidth: 220, 
 		// closeOnClick: true        // Closes side-nav on <a> clicks, useful for Angular/Meteor
